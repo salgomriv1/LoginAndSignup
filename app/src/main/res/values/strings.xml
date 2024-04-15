@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LoginAndSignup</string>
+    <string name="registrate"><u>Registrate</u></string>
 </resources>

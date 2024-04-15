@@ -38,13 +38,20 @@ class MainActivity : AppCompatActivity() {
         val btnSignIn: Button = findViewById(R.id.btnSignIn)
         val etEmail: TextView = findViewById(R.id.etEmail)
         val etPass: TextView = findViewById(R.id.etPass)
+        val btnRegistrar: TextView = findViewById(R.id.btnCrearCuenta)
 
         //Se incializa la variable
         firebaseAuth = Firebase.auth
 
         btnSignIn.setOnClickListener() {
 
+            //Habria que comprobar que los campos no estan vacios
             signIn(etEmail.text.toString(),etPass.text.toString())
+        }
+
+        btnRegistrar.setOnClickListener() {
+            val intent = Intent (this, CrearCuentaActivity::class.java)
+            startActivity(intent)
         }
 
     }
@@ -58,6 +65,8 @@ class MainActivity : AppCompatActivity() {
 
                     val user = firebaseAuth.currentUser
                     Toast.makeText(baseContext, "Autenticacion exitosa", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity2::class.java)
+                    startActivity(intent)
 
                 } else {
 
