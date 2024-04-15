@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 import com.sgr.loginandsignup.databinding.ActivityCrearCuentaBinding
 
@@ -31,6 +32,7 @@ class CrearCuentaActivity : AppCompatActivity() {
 
         binding.btnCrear.setOnClickListener() {
 
+            var name = binding.etNombre.text.toString()
             var email = binding.etCrearCuentaEmail.text.toString()
             var pass1 = binding.etCrearCuentaPass.text.toString()
             var pass2 = binding.etCrearCuentaConfirmPass.text.toString()
@@ -39,7 +41,7 @@ class CrearCuentaActivity : AppCompatActivity() {
             //Se comprueba que las dos contraseñas coinciden
 
             if (pass1.equals(pass2)) {
-                createAccount (email, pass1)
+                createAccount (name, email, pass1)
             } else {
                 Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT)
                     .show()
@@ -51,11 +53,21 @@ class CrearCuentaActivity : AppCompatActivity() {
     }
 
     //Metodo que crea la cuenta
-    private fun createAccount(email: String, pass: String) {
+    private fun createAccount(name: String, email: String, pass: String) {
 
         firebaseAuth.createUserWithEmailAndPassword(email, pass)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+
+                    //Recuperamos el usuario
+                    val user = firebaseAuth.currentUser
+                    //Preparamos las modificaciones del profile
+                    val profileUpdates = userProfileChangeRequest {
+                        displayName = name
+                    }
+                    //Modificamos el profile
+                    user!!.updateProfile(profileUpdates)
+
                     Toast.makeText(this, "Cuenta creada con exito", Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
