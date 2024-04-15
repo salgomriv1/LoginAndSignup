@@ -3,4 +3,5 @@
     <string name="registrate"><u>Registrate</u></string>
     <string name="olvido"><u>Olvidó su contraseña</u></string>
     <string name="cerrarSesion">Cerrar sesión</string>
+    <string name="default_web_client_id" />
 </resources>

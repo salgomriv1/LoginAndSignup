@@ -12,14 +12,17 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.sgr.loginandsignup.databinding.ActivityMain2Binding
 
 class MainActivity2 : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMain2Binding
     private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main2)
+        binding = ActivityMain2Binding.inflate(layoutInflater)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -27,6 +30,10 @@ class MainActivity2 : AppCompatActivity() {
         }
 
         firebaseAuth = Firebase.auth
+        //Se obtiene el actual user logueado
+        val user = firebaseAuth.currentUser
+        //Se imprime en textview el mail del user
+        binding.textView.text = user?.email.toString() + " esta logueado"
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
