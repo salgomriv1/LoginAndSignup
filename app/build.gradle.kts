@@ -3,8 +3,9 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
 
     //Google services
-    id("com.google.gms.google-services") version "4.4.1" apply false
+    id("com.google.gms.google-services")
 }
+
 
 android {
     namespace = "com.sgr.loginandsignup"
@@ -45,12 +46,14 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     //Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
+    implementation("com.google.firebase:firebase-auth")
 
     implementation("com.google.firebase:firebase-analytics")
 
