@@ -44,6 +44,13 @@ class MainActivity : AppCompatActivity() {
         //Se incializa la variable
         firebaseAuth = Firebase.auth
 
+        //Se comprueba si hay algun usuario logeado
+        if (firebaseAuth.currentUser != null) {
+            val intent = Intent (this, MainActivity2::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         btnSignIn.setOnClickListener() {
             //Habria que comprobar que los campos no estan vacios
             signIn(etEmail.text.toString(),etPass.text.toString())
