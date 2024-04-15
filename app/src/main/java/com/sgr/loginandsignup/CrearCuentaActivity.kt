@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
@@ -49,7 +50,6 @@ class CrearCuentaActivity : AppCompatActivity() {
             }
         }
 
-
     }
 
     //Metodo que crea la cuenta
@@ -71,8 +71,16 @@ class CrearCuentaActivity : AppCompatActivity() {
                     Toast.makeText(this, "Cuenta creada con exito", Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
-                    Toast.makeText(this, "Algo salio mal, Error: " + task.exception,
-                        Toast.LENGTH_SHORT).show()
+
+                    //Se indica si el fallo ha sido que el correo esta en uso
+                    val exception = task.exception
+                    if (exception is FirebaseAuthUserCollisionException) {
+                        Toast.makeText(this, "Este correo esta en uso", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(
+                            this, "Algo salio mal, Error: " + exception,Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
             }
     }

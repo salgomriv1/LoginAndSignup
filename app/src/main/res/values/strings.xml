@@ -2,4 +2,5 @@
     <string name="app_name">LoginAndSignup</string>
     <string name="registrate"><u>Registrate</u></string>
     <string name="olvido"><u>Olvidó su contraseña</u></string>
+    <string name="cerrarSesion">Cerrar sesión</string>
 </resources>
