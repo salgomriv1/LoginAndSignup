@@ -1,3 +1,3 @@
 # LoginAndSignup
 
-A test witch Firebase authentication
+A test with Firebase authentication
